@@ -1,0 +1,24 @@
+{
+  "name": "stock_market",
+  "version": "1.0.0",
+  "description": "FCC Full Stack Application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aball6412/stock_market.git"
+  },
+  "author": "Aaron Thompkins",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aball6412/stock_market/issues"
+  },
+  "homepage": "https://github.com/aball6412/stock_market#readme",
+  "dependencies": {
+    "ejs": "^2.5.1",
+    "express": "^4.14.0"
+  }
+}
