@@ -6,15 +6,15 @@ $(document).ready(function() {
     
     
     
-    w = 1000;
-    h = 650;
+    var w = 1000;
+    var h = 650;
     
     //Set chart margins
     var margin = {
-            top: 0,
-            bottom: 0,
-            right: 0,
-            left: 0
+            top: 25,
+            bottom: 25,
+            right: 25,
+            left: 25
         }
     
     
@@ -32,7 +32,11 @@ $(document).ready(function() {
         .range([0, width]);
     
     
-    console.log(d3.max(prices));
+    //Set up the axes
+    var yAxis = d3.axisLeft(y);
+    var xAxis = d3.axisBottom(x);
+    
+
     
     
     
@@ -66,9 +70,29 @@ $(document).ready(function() {
             })
             .attr("height", function(d, i) {
                 return 5;
-            })
+            });
+    
+    
+    //Add x axis to the chart
+    chart.append("g")
+        .classed("xAxis", true)
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+    
+    //Add y axis to the chart
+    chart.append("g")
+        .classed("yAxis", true)
+        .attr("transform", "translate(0,0)")
+        .call(yAxis);
     
     
 }); //End document
+
+
+
+
+
+
+
 
 
