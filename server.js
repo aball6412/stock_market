@@ -1,15 +1,17 @@
 var express = require("express");
 var app = express();
 var https = require("https");
-var ejs = require("ejs");
 
+
+
+//Set the port
 var port = process.env.PORT || 3000;
 
 
 
 
 
-
+//Serve static pages and set view engine
 app.use("/", express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 
@@ -19,6 +21,7 @@ app.set("view engine", "ejs");
 var api_key = process.env.QUANDL_API_KEY;
 
 
+//ROUTES
 
 app.get("/", function (request, response) {
     
@@ -67,19 +70,16 @@ app.get("/", function (request, response) {
             }
             
 
-            
-
-            
             response.render("index", { data: price_list });
 
             
         });
         
-    });
+    }); //End API request
     
     
     
-});
+}); //End index route
 
 
 app.listen(port);

@@ -1,4 +1,16 @@
 body {
-    border: solid;
-    margin: 50px;
+
+}
+
+.holder {
+
+}
+
+#chart {
+    background: #f9f7f7;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }

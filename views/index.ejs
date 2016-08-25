@@ -19,7 +19,12 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
         
         
+        <!-- D3 CDN -->
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        
+        <!-- My Docs -->
         <link href="style.css" type="text/css" rel="stylesheet" />
+        <script src="javascript.js"></script>
     
     
     </head>
@@ -28,16 +33,14 @@
     
     <body>
         
-        <h1>Chart the Stock Market</h1>
-        <h2>Javascript - Node App</h2>
-        <h3>EJS is Nominal</h3>
+        <h1 class="text-center">Chart the Stock Market</h1>
+
+    
+
     
 
         
-        <% for (var i in data) { %>
-        <p><%= data[i].close %></p>
-        <% } %>
-
+        <div class="holder"></div>
 
 
         
