@@ -24,11 +24,11 @@ $(document).ready(function() {
     
     //Set up scales
     var y = d3.scaleLinear()
-        .domain([0, prices.length])
-        .range([0, height]);
+        .domain([0, (d3.max(prices) + 5)])
+        .range([height, 0]);
     
     var x = d3.scaleLinear()
-        .domain([0, (d3.max(prices) + 5)])
+        .domain([0, prices.length])
         .range([0, width]);
     
     
@@ -60,10 +60,10 @@ $(document).ready(function() {
             .append("rect")
             .classed("dot", true)
             .attr("x", function(d, i) {
-                return x(d);
+                return x(i);
             })
             .attr("y", function(d, i) {
-                return y(i);
+                return y(d);
             })
             .attr("width", function(d, i) {
                 return 5;
