@@ -1,6 +1,7 @@
 var express = require("express");
 var app = express();
 var https = require("https");
+var ejs = require("ejs");
 
 var port = process.env.PORT || 3000;
 
@@ -23,6 +24,7 @@ app.get("/", function (request, response) {
     
     //Set up initial variables
     var str = "";
+    var price_list = [];
     var url = "https://www.quandl.com/api/v3/datasets/WIKI/";
     var ticker = "TSLA";
 
@@ -31,7 +33,7 @@ app.get("/", function (request, response) {
     //Make the query string
     url = url + ticker + ".json?api_key=" + api_key;
     
-    console.log(url);
+
     
     //Make the API request
     https.get(url, function(res) {
@@ -44,8 +46,32 @@ app.get("/", function (request, response) {
         
         res.on("end", function() {
             
-            response.send(str);
-            //response.render("index");
+            var data = JSON.parse(str);
+            
+            //Get the list of data
+            var data = data.dataset.data;
+            
+            for (var i=0; i<=10; i++) {
+                
+                var date = data[i][0];
+                var close = data[i][4];
+                
+                
+                var display = {
+                    date: date,
+                    close: close
+                }
+                
+                price_list.push(display);
+                
+            }
+            
+
+            
+
+            
+            response.render("index", { data: price_list });
+
             
         });
         
