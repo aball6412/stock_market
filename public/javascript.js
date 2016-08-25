@@ -11,11 +11,29 @@ $(document).ready(function() {
     
     //Set chart margins
     var margin = {
-            top: 50,
-            bottom: 50,
-            right: 50,
-            left: 50
+            top: 0,
+            bottom: 0,
+            right: 0,
+            left: 0
         }
+    
+    
+    var height = h - margin.top - margin.bottom;
+    var width = w - margin.left - margin.right;
+    
+    
+    //Set up scales
+    var y = d3.scaleLinear()
+        .domain([0, prices.length])
+        .range([0, height]);
+    
+    var x = d3.scaleLinear()
+        .domain([0, (d3.max(prices) + 5)])
+        .range([0, width]);
+    
+    
+    console.log(d3.max(prices));
+    
     
     
     //Append the svg to the DOM
@@ -38,10 +56,10 @@ $(document).ready(function() {
             .append("rect")
             .classed("dot", true)
             .attr("x", function(d, i) {
-                return 10;
+                return x(d);
             })
             .attr("y", function(d, i) {
-                return 10;
+                return y(i);
             })
             .attr("width", function(d, i) {
                 return 5;
