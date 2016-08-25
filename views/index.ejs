@@ -24,6 +24,22 @@
         
         <!-- My Docs -->
         <link href="style.css" type="text/css" rel="stylesheet" />
+        
+        <script>
+            var prices = [];
+            
+            
+            //Put prices into prices list through EJS loop in the server
+            //FOR USE IN THE javascript.js SCRIPT
+            <% for (var i in data) { %> 
+                prices.push(<%= data[i].close %>);
+            <% } %>
+            
+            console.log(prices);
+            
+        
+        </script>
+        
         <script src="javascript.js"></script>
     
     
@@ -34,19 +50,11 @@
     <body>
         
         <h1 class="text-center">Chart the Stock Market</h1>
+     
 
-    
-
-    
-
-        
         <div class="holder"></div>
 
 
-        
-
-    
-    
     </body>
 
 
