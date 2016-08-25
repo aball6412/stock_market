@@ -73,6 +73,15 @@ $(document).ready(function() {
             });
     
     
+    //Put line on chart
+    chart.append("line")
+        .style("stroke", "black")
+        .attr("y1", y(0))
+        .attr("y2", y(23))
+        .attr("x1", x(0))
+        .attr("x2", x(1))
+        
+    
     //Add x axis to the chart
     chart.append("g")
         .classed("xAxis", true)
