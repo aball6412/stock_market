@@ -5,14 +5,14 @@ $(document).ready(function() {
 
     //Set height and width
     var w = 1000;
-    var h = 650;
+    var h = 450;
     
     //Set chart margins
     var margin = {
             top: 50,
-            bottom: 50,
+            bottom: 75,
             right: 50,
-            left: 50
+            left: 100
         }
     
     
@@ -121,6 +121,28 @@ $(document).ready(function() {
         .classed("yAxis", true)
         .attr("transform", "translate(0,0)")
         .call(yAxis);
+    
+    
+    //Create labels
+    chart.select(".yAxis")
+        .append("text")
+        .attr("x", 0)
+        .attr("y", 0)
+        .style("font-size", 15)
+        .style("text-anchor", "middle")
+        .style("fill", "black")
+        .attr("transform", "translate(-" + ((margin.left/2 ) + 7) + "," + height/2 + ") rotate(-90)")
+        .text("Stock Price");
+    
+    
+    chart.select(".xAxis")
+        .append("text")
+        .attr("x", 0)
+        .attr("y", 0)
+        .style("font-size", 15)
+        .style("fill", "black")
+        .attr("transform", "translate(" + width/2 + "," + ((margin.bottom/2) + 7) + ")")
+        .text("Years");
     
     
 }); //End document
