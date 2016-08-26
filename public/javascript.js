@@ -5,6 +5,25 @@ $(document).ready(function() {
     console.log("nominal");
     
     
+    var line = function(prices) {
+        
+        for (var lit = 0; lit <= prices.length; lit++) {
+            
+            console.log("lit");
+            //console.log("x" + (i+2));
+            
+            
+            chart.append("line")
+                .style("stroke", "black")
+                .attr(("y" + (i+1)), y(prices[i]))
+                .attr(("y" + (i+2)), y(prices[i]))
+                .attr(("x" + (i+1)), x(prices[i]))
+                .attr(("x" + (i+2)), x(prices[i]));
+        }
+        
+        
+    } //End line function
+    
     
     var w = 1000;
     var h = 650;
@@ -70,16 +89,38 @@ $(document).ready(function() {
             })
             .attr("height", function(d, i) {
                 return 5;
-            });
+            })
+
     
     
-    //Put line on chart
-    chart.append("line")
-        .style("stroke", "black")
-        .attr("y1", y(0))
-        .attr("y2", y(23))
-        .attr("x1", x(0))
-        .attr("x2", x(1))
+//    //Put line on chart
+//    chart.append("line")
+//        .style("stroke", "black")
+//        .attr("y1", y(10))
+//        .attr("y2", y(50))
+//        .attr("x1", x(2))
+//        .attr("x2", x(3))
+    
+    chart.call(function(d, i){
+          
+        for (var j = 0; j < prices.length; j++) {
+            
+            if ((j+1) === prices.length) {
+                break;
+            }
+            console.log("y" + (j+1));
+            console.log("y" + (j+2));
+   
+            chart.append("line")
+                .style("stroke", "black")
+                .attr( "y1", y(prices[j]) )
+                .attr( "y2", y(prices[j+1]) )
+                .attr( "x1", x(j) )
+                .attr( "x2", x(j+1) );
+
+        }
+           
+    });
         
     
     //Add x axis to the chart
