@@ -59,7 +59,7 @@ app.get("/", function (request, response) {
                 
 
                 var date = data[i][0];
-                var close = data[i][4];
+                var close = data[i][11];
                 
                 
                 var display = {
