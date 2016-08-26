@@ -26,6 +26,8 @@
         <link href="style.css" type="text/css" rel="stylesheet" />
         
         <script>
+            
+            //Make holder list for stock prices
             var prices = [];
             
             
@@ -35,9 +37,12 @@
                 prices.push(<%= data[i].close %>);
             <% } %>
             
-            console.log(prices);
+            //Reverse the list because Quandl API lists most recent prices first
+            prices.reverse();
+
             
-            prices = [1, 23, 10, 50, 25, 27, 17, 12, 39, 44, 21, 100];
+            //Prices variable for testing the chart functionality below
+            //prices = [1, 23, 10, 50, 25, 27, 17, 12, 39, 44, 21, 100];
             
         
         </script>

@@ -54,8 +54,11 @@ app.get("/", function (request, response) {
             //Get the list of data
             var data = data.dataset.data;
             
-            for (var i=0; i<=10; i++) {
+            console.log(data.length);
+            
+            for (var i=0; i <data.length; i++) {
                 
+
                 var date = data[i][0];
                 var close = data[i][4];
                 
