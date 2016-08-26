@@ -9,20 +9,26 @@ $(document).ready(function() {
     
     //Set chart margins
     var margin = {
-            top: 25,
-            bottom: 25,
-            right: 25,
-            left: 25
+            top: 50,
+            bottom: 50,
+            right: 50,
+            left: 50
         }
     
     
     var height = h - margin.top - margin.bottom;
     var width = w - margin.left - margin.right;
     
+    //console.log(prices[1000].date.getFullYear());
+    
+
+    
     
     //Set up scales
     var y = d3.scaleLinear()
-        .domain([0, (d3.max(prices) + 5)])
+        .domain([0, (d3.max(prices, function(d) {
+            return d.close;
+        }) + 5)])
         .range([height, 0]);
     
     var x = d3.scaleLinear()
@@ -30,9 +36,20 @@ $(document).ready(function() {
         .range([0, width]);
     
     
+
+    //Make a time scale
+    var yearScale = d3.scaleTime()
+        .domain([new Date(d3.min(prices, function(d) {
+            return d.date;
+        })), new Date(d3.max(prices, function(d) {
+            return d.date;
+        }))] )
+        .range([0, width]);
+    
+    
     //Set up the axes
     var yAxis = d3.axisLeft(y);
-    var xAxis = d3.axisBottom(x);
+    var xAxis = d3.axisBottom(yearScale);
     
 
     
@@ -61,7 +78,7 @@ $(document).ready(function() {
                 return x(i);
             })
             .attr("y", function(d, i) {
-                return y(d);
+                return y(d.close);
             })
             .attr("width", function(d, i) {
                 return 1;
@@ -83,8 +100,8 @@ $(document).ready(function() {
             chart.append("line")
                 .style("stroke", "black")
                 .style("stroke-width", 2)
-                .attr( "y1", y(prices[j]) )
-                .attr( "y2", y(prices[j+1]) )
+                .attr( "y1", y(prices[j].close) )
+                .attr( "y2", y(prices[j+1].close) )
                 .attr( "x1", x(j) )
                 .attr( "x2", x(j+1) );
 

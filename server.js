@@ -54,7 +54,6 @@ app.get("/", function (request, response) {
             //Get the list of data
             var data = data.dataset.data;
             
-            console.log(data.length);
             
             for (var i=0; i <data.length; i++) {
                 
@@ -72,6 +71,7 @@ app.get("/", function (request, response) {
                 
             }
             
+
 
             response.render("index", { data: price_list });
 

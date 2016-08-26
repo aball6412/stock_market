@@ -29,13 +29,25 @@
             
             //Make holder list for stock prices
             var prices = [];
+            var data;
             
             
             //Put prices into prices list through EJS loop in the server
             //FOR USE IN THE javascript.js SCRIPT
-            <% for (var i in data) { %> 
-                prices.push(<%= data[i].close %>);
+            <% for (var i in data) { %>
+            
+                data = {
+                    date: new Date('<%= data[i].date %>'),
+                    close: <%= data[i].close %>
+                }
+                
+                prices.push(data);
+                
+                //prices.push(<%= data[i].close %>);
             <% } %>
+            
+
+
             
             //Reverse the list because Quandl API lists most recent prices first
             prices.reverse();
