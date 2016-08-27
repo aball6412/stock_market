@@ -85,4 +85,22 @@ app.get("/", function (request, response) {
 }); //End index route
 
 
+
+
+
+app.get("/update", function(request, response) {
+    
+    
+    console.log(request.query.ticker);
+    
+    
+    response.send("Successful Connection");
+    
+}); //End update route
+
+
+
+
+
+
 app.listen(port);
