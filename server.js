@@ -35,6 +35,7 @@ var get_stock = function(url, update, response) {
     //Make the API request
     https.get(url, function(res) {
         
+
         
         res.on("data", function(chunk) {
             str += chunk;
@@ -43,37 +44,52 @@ var get_stock = function(url, update, response) {
         
         res.on("end", function() {
             
+            
+
+            
             var data = JSON.parse(str);
             
-            //Get the list of data
-            var data = data.dataset.data;
+            if (data.quandl_error) {
+                response.send("Error");
+            }
             
-            
-            for (var i=0; i <data.length; i++) {
+            else {
                 
+                
+                //Get the list of data
+                var data = data.dataset.data;
 
-                var date = data[i][0];
-                var close = data[i][11];
-                
-                
-                var display = {
-                    date: date,
-                    close: close
+
+                for (var i=0; i <data.length; i++) {
+
+
+                    var date = data[i][0];
+                    var close = data[i][11];
+
+
+                    var display = {
+                        date: date,
+                        close: close
+                    }
+
+                    price_list.push(display);
+
+                }
+
+                if (update === false) {
+                    response.render("index", { data: price_list }); 
+                }
+                else if (update === true) {
+                    response.send(price_list);
                 }
                 
-                price_list.push(display);
                 
-            }
+            } //End else statement
             
-
-            if (update === false) {
-                
-                response.render("index", { data: price_list }); 
-            }
-            else if (update === true) {
-                
-                response.send(price_list);
-            }
+            
+            
+            
+            
             
 
             
@@ -128,6 +144,16 @@ app.get("/update", function(request, response) {
     
     
 }); //End update route
+
+
+
+app.get("/remove", function(request, response) {
+    
+    
+    response.send("Success");
+    
+    
+});
 
 
 

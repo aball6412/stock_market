@@ -16,23 +16,32 @@ body {
     margin-bottom: 50px;
 }
 
-.yAxis {
 
-}
-
+/**** INPUT BAR AND ERROR MESSAGE STYLING ***/
 .add_stock {
 
     margin-bottom: 25px;
 }
 
-.holder {
+.error_text {
+    color: red;
+}
 
+.no_show {
+    display: none;
+}
+
+
+/**** CHARTED STOCKS DISPLAY STYLING ***/
+.holder {
     padding: 0;
 }
+
 
 .stock {
     padding: 15px;
 }
+
 
 .stock_holder {
     border: solid;
