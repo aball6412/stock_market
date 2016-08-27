@@ -21,22 +21,16 @@ app.set("view engine", "ejs");
 var api_key = process.env.QUANDL_API_KEY;
 
 
-//ROUTES
 
-app.get("/", function (request, response) {
+
+
+//Create function to make API call to Quandl
+var get_stock = function(url, update, response) {
     
-    //Set up initial variables
+
+    //Set initial variables
     var str = "";
     var price_list = [];
-    var url = "https://www.quandl.com/api/v3/datasets/WIKI/";
-    var ticker = "TSLA";
-
-    
-
-    //Make the query string
-    url = url + ticker + ".json?api_key=" + api_key;
-    
-
     
     //Make the API request
     https.get(url, function(res) {
@@ -72,13 +66,45 @@ app.get("/", function (request, response) {
             }
             
 
-
-            response.render("index", { data: price_list });
+            if (update === false) {
+                
+                response.render("index", { data: price_list }); 
+            }
+            else if (update === true) {
+                
+                response.send(price_list);
+            }
+            
 
             
         });
         
     }); //End API request
+    
+    
+}; //End get stock function
+
+
+
+
+
+
+
+
+//ROUTES
+
+app.get("/", function (request, response) {
+    
+    //Set up initial variables
+    var url = "https://www.quandl.com/api/v3/datasets/WIKI/";
+    var ticker = "TSLA";
+
+    //Make the query string
+    url = url + ticker + ".json?api_key=" + api_key;
+    
+    //Make API request
+    get_stock(url, false, response);
+    
     
     
     
@@ -90,11 +116,16 @@ app.get("/", function (request, response) {
 
 app.get("/update", function(request, response) {
     
+    //Set initial variables
+    var url = "https://www.quandl.com/api/v3/datasets/WIKI/";
+    var ticker = request.query.ticker;
     
-    console.log(request.query.ticker);
+    //Make query string
+    url = url + ticker + ".json?api_key=" + api_key;
     
+    //Make API request
+    get_stock(url, true, response);
     
-    response.send("Successful Connection");
     
 }); //End update route
 
