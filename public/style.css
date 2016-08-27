@@ -2,8 +2,9 @@ body {
 
 }
 
-.holder {
-
+.row {
+    padding: 0;
+    margin: 0;
 }
 
 #chart {
@@ -20,6 +21,24 @@ body {
 }
 
 .add_stock {
-    margin-left: 100px;
+
     margin-bottom: 25px;
+}
+
+.holder {
+
+    padding: 0;
+}
+
+.stock {
+    padding: 15px;
+}
+
+.stock_holder {
+    border: solid;
+    border-color: #CCC;
+    border-radius: 10px;
+    padding: 10px;
+    min-height: 50px;
+    text-align: center;
 }
