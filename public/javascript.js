@@ -153,9 +153,14 @@ $(document).ready(function() {
         
         console.log("I need to remove this stock");
         
+        //Get the ticker symbol
         var ticker = $(this).parent().data("internalid");
         
+        //Remove specified stock from the chart
         d3.selectAll("." + ticker).remove();
+        
+        //Remove specified stock from the screen
+        $(this).parent().parent().remove();
         
     });
     
