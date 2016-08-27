@@ -122,7 +122,7 @@ $(document).ready(function() {
                     chart.append("line")
                         .style("stroke", colors[random])
                         .style("stroke-width", 2)
-                        .classed(ticker, true)
+                        .classed(ticker.toUpperCase(), true)
                         .attr( "y1", y(prices[j].close) )
                         .attr( "y2", y(prices[j+1].close) )
                         .attr( "x1", x(j) )
@@ -131,7 +131,7 @@ $(document).ready(function() {
                 }
                 
                 
-                $(".row").append("<div style='color:" + colors[random] + "' class='stock col-xs-4'><div class='stock_holder'><h3>" + ticker.toUpperCase() + "</h3><button type='button' class='btn btn-danger btn-sm remove_stock'>Remove</button></div></div>");
+                $(".row").append("<div style='color:" + colors[random] + "' class='stock col-xs-4'><div data-internalid='" + ticker.toUpperCase() + "' class='stock_holder'><h3>" + ticker.toUpperCase() + "</h3><button type='button' class='btn btn-danger btn-sm remove_stock'>Remove</button></div></div>");
 
             });
             
@@ -153,7 +153,9 @@ $(document).ready(function() {
         
         console.log("I need to remove this stock");
         
-        console.log(this);
+        var ticker = $(this).parent().data("internalid");
+        
+        d3.selectAll("." + ticker).remove();
         
     });
     
