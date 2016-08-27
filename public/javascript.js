@@ -1,6 +1,6 @@
 $(document).ready(function() {
     
-    //HOLDS ALL JAVASCRIPT THAT DOES NOT PERTAIN TO CREATING THE CHART
+    //HOLDS ALL JAVASCRIPT THAT DOES NOT PERTAIN TO ADDING NEW STOCKS TO CHART AFTER INITIAL PAGE LOAD
 
     $(".get_stock").click(function() {
         
@@ -17,11 +17,34 @@ $(document).ready(function() {
         //Make request to server with specified user data
         $.get("/update", data, function(data) {
             
+      
+            //Get the prices and reverse array so that it's charted correctly
+            var prices = data.reverse();
+            
+            
+            
+            //Slice the price array so that we are starting at the start date
+            var date = new Date();
+    
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getUTCDate();
+
+
+            //Create a new date that goes back a year (or other amount of time if we want later)
+            var start_date = new Date(month + "/" + day + "/" + (year - 1));
+
+            //Find the index where api data matches our start date
+            var start_index = prices.findIndex(function(element, index, array) {
+
+                return new Date(array[index].date) >= start_date;
+
+            });
+
+            //Slice the api data so that we are only charting from our start date forward
+            prices = prices.slice(start_index);
             
 
-            
-            //Get the prices
-            var prices = data.reverse();
             
             
             //Append new stock to the chart
@@ -83,14 +106,19 @@ $(document).ready(function() {
             //Draw the line on the chart
             chart.call(function(d, i){
 
+                //Get a random color
+                var colors = ["#CCC", "#4d9e2e", "#5ae8d7", "#1f46bf", "#670ec1", "#de29b4", "#ec4b5f", "#e0dd09", "#09e0d0", "#c5adce"];
+
+                var random = Math.floor(Math.random() * 10);
+                
                 for (var j = 0; j < prices.length; j++) {
 
                     if ((j+1) === prices.length) {
                         break;
                     }
-
+                    
                     chart.append("line")
-                        .style("stroke", "red")
+                        .style("stroke", colors[random])
                         .style("stroke-width", 2)
                         .attr( "y1", y(prices[j].close) )
                         .attr( "y2", y(prices[j+1].close) )

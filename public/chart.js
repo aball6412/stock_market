@@ -1,7 +1,34 @@
 
 $(document).ready(function() {
     
-    //HOLDS ALL JAVASCRIPT RELATED TO CREATING THE CHART
+    //HOLDS ALL JAVASCRIPT RELATED TO CREATING THE CHART ON INITIAL PAGE LOAD
+    
+    
+    
+    //Find the date that we want to chart for
+    //Get current date and split it into year, month, day
+    var date = new Date();
+    
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getUTCDate();
+    
+    
+    //Create a new date that goes back a year (or other amount of time if we want later)
+    var start_date = new Date(month + "/" + day + "/" + (year - 1));
+    
+    //Find the index where api data matches our start date
+    var start_index = prices.findIndex(function(element, index, array) {
+        
+        return new Date(array[index].date) >= start_date;
+        
+    });
+    
+    //Slice the api data so that we are only charting from our start date forward
+    prices = prices.slice(start_index);
+    
+    
+    
 
     //Set height and width
     var w = 1000;

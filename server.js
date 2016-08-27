@@ -97,7 +97,7 @@ app.get("/", function (request, response) {
     
     //Set up initial variables
     var url = "https://www.quandl.com/api/v3/datasets/WIKI/";
-    var ticker = "TSLA";
+    var ticker = "MSFT";
 
     //Make the query string
     url = url + ticker + ".json?api_key=" + api_key;
