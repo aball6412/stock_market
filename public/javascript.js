@@ -179,6 +179,12 @@ $(document).ready(function() {
             
             console.log(data);
             
+            if (data === "Success") {
+                
+                //Emit message through sockets.io so all other clients update stock list as well
+                socket.emit("remove_stock", ticker.toUpperCase());
+            }
+            
             
         }); //End get request
         

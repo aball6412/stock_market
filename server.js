@@ -168,19 +168,19 @@ io.on("connection", function(socket) {
     socket.on("new_stock", function(ticker) {
         
         console.log(ticker);
+     
+    });
+    
+    socket.on("remove_stock", function(ticker) {
         
+        
+        console.log(ticker);
     });
     
     socket.on("disconnect", function() {
         console.log("a user disconnected");
     })
     
-    
-//    socket.emit("Updated", { data: "Auto update" });
-//    
-//    socket.on("New", function(data) {
-//        console.log(data);
-//    });
     
     
 }); //End .io
