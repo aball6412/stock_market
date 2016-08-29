@@ -172,14 +172,14 @@ io.on("connection", function(socket) {
     
     socket.on("new_stock", function(ticker) {
         
+        //When a user updates stock make API call to Quandl and send info to all connected clients
         var url = "https://www.quandl.com/api/v3/datasets/WIKI/";
         var ticker = ticker;
-        
         url = url + ticker + ".json?api_key=" + api_key;
         
+        //Get stock function will emit to all clients inside the function
         get_stock(url, "socket.io", null, ticker);
         
-        //io.emit("new_stock", ticker);
      
     });
     

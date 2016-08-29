@@ -147,7 +147,7 @@ $(document).ready(function() {
                     }
 
 
-                    $(".row").append("<div style='color:" + colors[random] + "' class='stock col-xs-4'><div data-internalid='" + ticker.toUpperCase() + "' class='stock_holder'><h3>" + ticker.toUpperCase() + "</h3><button type='button' class='btn btn-danger btn-sm remove_stock'>Remove</button></div></div>");
+                    $(".row").append("<div style='color:" + colors[random] + "' class='stock " + ticker.toUpperCase() + " col-xs-4'><div data-internalid='" + ticker.toUpperCase() + "' class='stock_holder'><h3>" + ticker.toUpperCase() + "</h3><button type='button' class='btn btn-danger btn-sm remove_stock'>Remove</button></div></div>");
 
                 });
                 
