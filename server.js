@@ -29,7 +29,7 @@ var api_key = process.env.QUANDL_API_KEY;
 
 
 //Create function to make API call to Quandl
-var get_stock = function(url, update, response) {
+var get_stock = function(url, update, response, ticker) {
     
 
     //Set initial variables
@@ -85,6 +85,11 @@ var get_stock = function(url, update, response) {
                 }
                 else if (update === true) {
                     response.send(price_list);
+                }
+                
+                else if (update === "socket.io") {
+                    
+                    io.emit("new_stock", { data: price_list, ticker: ticker.toUpperCase() });
                 }
                 
                 
@@ -167,15 +172,25 @@ io.on("connection", function(socket) {
     
     socket.on("new_stock", function(ticker) {
         
-        console.log(ticker);
+        var url = "https://www.quandl.com/api/v3/datasets/WIKI/";
+        var ticker = ticker;
+        
+        url = url + ticker + ".json?api_key=" + api_key;
+        
+        get_stock(url, "socket.io", null, ticker);
+        
+        //io.emit("new_stock", ticker);
      
     });
     
     socket.on("remove_stock", function(ticker) {
+         
         
         
-        console.log(ticker);
+        io.emit("remove_stock", ticker);
+        
     });
+    
     
     socket.on("disconnect", function() {
         console.log("a user disconnected");
@@ -186,8 +201,7 @@ io.on("connection", function(socket) {
 }); //End .io
 
 
-//app.listen(port);
-
+//Need to use http.listen instead of app.listen because http is the one that sockets.io is connected to.
 http.listen(port, function() {
     
     
