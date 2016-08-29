@@ -165,8 +165,13 @@ io.on("connection", function(socket) {
     
     console.log("a user is connected");
     
-    socket.on("disconnect", function() {
+    socket.on("new_stock", function(ticker) {
         
+        console.log(ticker);
+        
+    });
+    
+    socket.on("disconnect", function() {
         console.log("a user disconnected");
     })
     

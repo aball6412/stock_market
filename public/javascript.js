@@ -33,6 +33,9 @@ $(document).ready(function() {
             
             else {
                 
+                //Emit message through sockets.io so all other clients update stock list as well
+                socket.emit("new_stock", ticker.toUpperCase());
+                
                 //Get the prices and reverse array so that it's charted correctly
                 var prices = data.reverse();
 
