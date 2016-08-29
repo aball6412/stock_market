@@ -6,13 +6,11 @@ var io = require('socket.io')(http);
 var https = require("https");
 
 
-
+//Set variable to count connections
+var connectcount = 0;
 
 //Set the port
 var port = process.env.PORT || 3000;
-
-
-
 
 
 //Serve static pages and set view engine
@@ -48,9 +46,6 @@ var get_stock = function(url, update, response, ticker) {
         
         res.on("end", function() {
             
-            
-
-            
             var data = JSON.parse(str);
             
             if (data.quandl_error) {
@@ -81,7 +76,7 @@ var get_stock = function(url, update, response, ticker) {
                 }
 
                 if (update === false) {
-                    response.render("index", { data: price_list }); 
+                    response.render("index", { data: price_list, ticker: ticker }); 
                 }
                 else if (update === true) {
                     response.send(price_list);
@@ -90,19 +85,14 @@ var get_stock = function(url, update, response, ticker) {
                 else if (update === "socket.io") {
                     
                     io.emit("new_stock", { data: price_list, ticker: ticker.toUpperCase() });
+
                 }
                 
                 
             } //End else statement
-            
-            
-            
-            
-            
-            
-
-            
+ 
         });
+        
         
     }); //End API request
     
@@ -122,13 +112,13 @@ app.get("/", function (request, response) {
     
     //Set up initial variables
     var url = "https://www.quandl.com/api/v3/datasets/WIKI/";
-    var ticker = "MSFT";
+    var ticker = "TSLA";
 
     //Make the query string
     url = url + ticker + ".json?api_key=" + api_key;
     
     //Make API request
-    get_stock(url, false, response);
+    get_stock(url, false, response, ticker);
     
     
     
@@ -168,7 +158,13 @@ app.get("/remove", function(request, response) {
 
 io.on("connection", function(socket) {
     
-    console.log("a user is connected");
+    //On new connection add one to connect count
+    connectcount++;
+    
+    //Emit this new connectiion number to all clients
+    io.emit("count_connectons", connectcount);
+    
+    console.log(connectcount);
     
     socket.on("new_stock", function(ticker) {
         
@@ -184,16 +180,19 @@ io.on("connection", function(socket) {
     });
     
     socket.on("remove_stock", function(ticker) {
-         
-        
-        
+
         io.emit("remove_stock", ticker);
         
     });
     
     
     socket.on("disconnect", function() {
-        console.log("a user disconnected");
+        
+        //On disconnect subtract from connectcount
+        connectcount--;
+        
+        //Emit new number of connections to all clients
+        io.emit("count_connections", connectcount);
     })
     
     

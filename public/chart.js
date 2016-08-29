@@ -98,6 +98,8 @@ $(document).ready(function() {
         .enter()
             .append("rect")
             .classed("dot", true)
+            .classed(ticker.toUpperCase(), true)
+            .attr("display", "none")
             .attr("x", function(d, i) {
                 return x(i);
             })
@@ -115,6 +117,11 @@ $(document).ready(function() {
     //Draw the line on the chart
     chart.call(function(d, i){
           
+        //Get a random color
+        var colors = ["#CCC", "#4d9e2e", "#5ae8d7", "#1f46bf", "#670ec1", "#de29b4", "#ec4b5f", "#e0dd09", "#09e0d0", "#c5adce"];
+
+        var random = Math.floor(Math.random() * 10);
+        
         for (var j = 0; j < prices.length; j++) {
             
             if ((j+1) === prices.length) {
@@ -122,14 +129,18 @@ $(document).ready(function() {
             }
    
             chart.append("line")
-                .style("stroke", "black")
+                .style("stroke", colors[random])
                 .style("stroke-width", 2)
+                .classed(ticker.toUpperCase(), true)
                 .attr( "y1", y(prices[j].close) )
                 .attr( "y2", y(prices[j+1].close) )
                 .attr( "x1", x(j) )
                 .attr( "x2", x(j+1) );
-
         }
+        
+        
+        $(".row").append("<div style='color:" + colors[random] + "' class='stock " + ticker.toUpperCase() + " col-xs-4'><div data-internalid='" + ticker.toUpperCase() + "' class='stock_holder'><h3>" + ticker.toUpperCase() + "</h3><button type='button' class='btn btn-danger btn-sm remove_stock'>Remove</button></div></div>");
+        
            
     });
         
