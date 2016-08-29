@@ -1,6 +1,10 @@
 var express = require("express");
-var app = express();
+var app = require("express")();
+var http = require("http").Server(app);
+var io = require('socket.io')(http);
+
 var https = require("https");
+
 
 
 
@@ -157,7 +161,30 @@ app.get("/remove", function(request, response) {
 
 
 
+io.on("connection", function(socket) {
+    
+    console.log("a user is connected");
+    
+    socket.on("disconnect", function() {
+        
+        console.log("a user disconnected");
+    })
+    
+    
+//    socket.emit("Updated", { data: "Auto update" });
+//    
+//    socket.on("New", function(data) {
+//        console.log(data);
+//    });
+    
+    
+}); //End .io
 
 
+//app.listen(port);
 
-app.listen(port);
+http.listen(port, function() {
+    
+    
+    console.log("listening on port: " + port);
+})
