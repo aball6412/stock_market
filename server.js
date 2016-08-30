@@ -6,9 +6,6 @@ var io = require('socket.io')(http);
 var https = require("https");
 
 
-//Set variable to count connections
-var connectcount = 0;
-
 //Set the port
 var port = process.env.PORT || 3000;
 
@@ -157,14 +154,8 @@ app.get("/remove", function(request, response) {
 
 
 io.on("connection", function(socket) {
-    
-    //On new connection add one to connect count
-    connectcount++;
-    
-    //Emit this new connectiion number to all clients
-    io.emit("count_connectons", connectcount);
-    
-    console.log(connectcount);
+
+    console.log("A client connected");
     
     socket.on("new_stock", function(ticker) {
         
@@ -188,11 +179,7 @@ io.on("connection", function(socket) {
     
     socket.on("disconnect", function() {
         
-        //On disconnect subtract from connectcount
-        connectcount--;
-        
-        //Emit new number of connections to all clients
-        io.emit("count_connections", connectcount);
+        console.log("A client disconnected");
     })
     
     

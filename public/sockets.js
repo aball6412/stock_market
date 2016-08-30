@@ -100,6 +100,7 @@ socket.on("new_stock", function(data) {
                 });
 
 
+
         //Draw the line on the chart
         chart.call(function(d, i){
 
@@ -129,6 +130,18 @@ socket.on("new_stock", function(data) {
             $(".row").append("<div style='color:" + colors[random] + "' class='stock " + ticker.toUpperCase() + " col-xs-4'><div data-internalid='" + ticker.toUpperCase() + "' class='stock_holder'><h3>" + ticker.toUpperCase() + "</h3><button type='button' class='btn btn-danger btn-sm remove_stock'>Remove</button></div></div>");
 
         });
+        
+        
+        //Make the chart animated
+        d3.select(".display").on("mouseover", function(d, i) {
+            
+            console.log("I hovered");
+            console.log(d3.event.pageX);
+            console.log(d3.event.pageY);
+            
+        });
+        
+        
 
     }
 
@@ -144,11 +157,6 @@ socket.on("remove_stock", function(ticker) {
 
 
 
-socket.on("count_connections", function(connections) {
-    
-    console.log("Connected Users: " + connections);
-    
-});
 
 
     

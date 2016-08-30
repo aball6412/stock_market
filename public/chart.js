@@ -112,6 +112,7 @@ $(document).ready(function() {
             .attr("height", function(d, i) {
                 return 1;
             });
+            
 
     
     //Draw the line on the chart
