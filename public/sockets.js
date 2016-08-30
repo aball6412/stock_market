@@ -6,8 +6,15 @@ var socket = io.connect("http://localhost:3000/");
 
 socket.on("new_stock", function(data) {
 
+    console.log($(".stock").hasClass(data.ticker));
+    
+    
     if (data === "Error") {
         $(".error_text").removeClass("no_show");
+    }
+    else if ($(".stock").hasClass(data.ticker)) {
+        
+        //No need to add stock, user already has it
     }
 
     else {
