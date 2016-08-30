@@ -2,7 +2,7 @@
 FCC Full Stack Project
 
 # DEMO
-*Comming Soon*
+https://fcc-chart-stocks.herokuapp.com/
 
 # Built For FreeCodeCamp Challenge
 https://www.freecodecamp.com/challenges/chart-the-stock-market
