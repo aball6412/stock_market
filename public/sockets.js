@@ -2,7 +2,7 @@
 //DO NOT ADD "$(document).ready" FUNCTION BECAUSE WE NEED TO EXPOSE THE VARIABLES IMMEDIATELY TO OTHER SCRIPTS THAT FOLLOW THIS ONE
 
 //Socket.io script
-var socket = io.connect("http://localhost:3000/");
+var socket = io.connect("https://fcc-chart-stocks.herokuapp.com/");
 
 socket.on("new_stock", function(data) {
 
