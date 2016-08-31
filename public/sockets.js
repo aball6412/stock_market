@@ -2,13 +2,11 @@
 //DO NOT ADD "$(document).ready" FUNCTION BECAUSE WE NEED TO EXPOSE THE VARIABLES IMMEDIATELY TO OTHER SCRIPTS THAT FOLLOW THIS ONE
 
 //Socket.io script
-var socket = io.connect("https://fcc-chart-stocks.herokuapp.com/");
+//var socket = io.connect("https://fcc-chart-stocks.herokuapp.com/");
+var socket = io.connect("localhost:3000/");
 
 socket.on("new_stock", function(data) {
 
-    console.log($(".stock").hasClass(data.ticker));
-    
-    
     if (data === "Error") {
         $(".error_text").removeClass("no_show");
     }

@@ -21,8 +21,6 @@ var api_key = process.env.QUANDL_API_KEY;
 
 
 
-
-
 //Create function to make API call to Quandl
 var get_stock = function(url, update, response, ticker) {
     
@@ -46,7 +44,7 @@ var get_stock = function(url, update, response, ticker) {
             var data = JSON.parse(str);
             
             if (data.quandl_error) {
-                response.send("Error");
+                io.emit("new_stock", "Error");
             }
             
             else {
