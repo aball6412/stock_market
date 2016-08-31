@@ -2,8 +2,10 @@
 //DO NOT ADD "$(document).ready" FUNCTION BECAUSE WE NEED TO EXPOSE THE VARIABLES IMMEDIATELY TO OTHER SCRIPTS THAT FOLLOW THIS ONE
 
 //Socket.io script
-//var socket = io.connect("https://fcc-chart-stocks.herokuapp.com/");
-var socket = io.connect("localhost:3000/");
+var socket = io.connect("https://fcc-chart-stocks.herokuapp.com/");
+
+//Development variable below
+//var socket = io.connect("localhost:3000/");
 
 socket.on("new_stock", function(data) {
 
